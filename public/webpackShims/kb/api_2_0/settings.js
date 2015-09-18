@@ -89,7 +89,8 @@ define(function () {
           },
           'index.cache.query.enable': {
             __one_of: [true, false]
-          }
+          },
+          'codec': 'best_compression'
         }
       }
     });
