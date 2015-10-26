@@ -1,4 +1,4 @@
-@import "./sense.light.css";
+@import "./sense.light.less";
 @import (reference) "~ui/styles/variables";
 
 #es_method {
@@ -15,7 +15,7 @@
   display: flex;
   flex: 1 1 auto;
   position: relative;
-  padding: 10px;
+  padding: 15px;
 }
 
 #editor_container {
@@ -40,7 +40,7 @@
 
 #editor_resizer {
   display: flex;
-  flex: 0 0 13px;
+  flex: 0 0 18px;
   cursor: ew-resize;
   background-color: transparent;
   align-items: center;
@@ -51,6 +51,13 @@
 
   &.active {
     background-color: rgba(194, 193, 208, 100);
+  }
+
+  .resize-handle {
+    flex: 1 1 1px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 300;
   }
 }
 
@@ -88,22 +95,11 @@
   }
 }
 
-.ace_gutter {
-  margin-top: 1px;
-}
-
 #autocomplete {
   visibility: hidden;
   position: absolute;
-  /* by pass any other element in ace and resize bar, but not modal popups  */
   z-index: 1003;
   margin-top: 22px;
-  /*font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;*/
-  /*font-size: 12px;*/
-  /*max-height: 100px;*/
-  /*overflow-y: auto;*/
-  /* prevent horizontal scrollbar */
-  /*overflow-x: hidden;*/
 }
 
 .ui-state-focus {
@@ -169,37 +165,20 @@ sense-help-example {
   width: 100% !important;
 }
 
-// .ui-resizable-e {
-//   cursor: ew-resize;
-//   width: 13px;
-//   right: -14px;
-//   top: -1px;
-//   bottom: -2px;
-//   background-color: transparent;
-//   position: absolute;
-// }
-//
-// .ui-resizable-e:hover {
-//   background-color: #DCDCDC;
-// }
-
 .ui-resizable-e.active {
   background-color: rgba(194, 193, 208, 100);
 }
 
-/** COPIED FROM BOOTSTRAP, MODIFIED SELECTORS **/
-.dropdown-menu li > a.zeroclipboard-is-hover,
-.dropdown-menu li > a.zeroclipboard-is-active {
-  color: #FFF;
-  text-decoration: none;
-  background-color: #0081C2;
-  background-image: -moz-linear-gradient(top, #08c, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#08C), to(#0077B3));
-  background-image: -webkit-linear-gradient(top, #08C, #0077B3);
-  background-image: -o-linear-gradient(top, #08c, #0077b3);
-  background-image: linear-gradient(to bottom, #08C, #0077B3);
-  background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
-}
+// update to use zc classes for hover/active states
+.dropdown-menu {
+  border-radius: 0px;
 
-/** END COPIED **/
+  li > a {
+    &.zeroclipboard-is-hover,
+    &.zeroclipboard-is-active {
+      color: @dropdown-link-hover-color;
+      text-decoration: none;
+      background-color: @dropdown-link-hover-bg;
+    }
+  }
+}
