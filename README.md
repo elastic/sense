@@ -29,7 +29,7 @@ Screenshots
 
 ### Handy API suggestions
 
-Sense offers handy contextual suggestion to the Elasticsearch API
+Sense offers handy contextual suggestion to the Elasticsearch API.
 
 ![API Suggestions](https://github.com/bleskes/sense/raw/readme/docs/images/readme_api_suggestions.png)
 
@@ -40,20 +40,23 @@ Sometimes it is hard to find that little missing comma. Sense automatically high
 
 ### Scope collapsing
 
-Working on a big JSON query can be distracting. Using a handy keyboard shortcut, Sense allows you to focus on a sub section and fold other away
+Working on a big JSON query can be distracting. Using the mouse or via a handy keyboard shortcut (Ctrl/Cmd+Option+0)
+, Sense allows you to focus on a sub section and fold others away.
 
 ![Folding](https://github.com/bleskes/sense/raw/readme/docs/images/readme_api_suggestions.png)
 
 ### Auto formatting
 
-Type your commands however you want and let Sense format them for you
+Type your commands however you want and let Sense format them for you.
 
 ![Auto formatting](https://github.com/bleskes/sense/raw/readme/docs/images/readme_auto_formatting_mix.png)
 
 
 ### Submit multiple requests at once
 
-When testing or trying things out you frequently have repeat the same sequence of commands. Just write them all in Sense, select and submit multiple requests to Elasticsearch
+When testing or trying things out you frequently need to repeat the same sequence of commands.
+Just write them all in Sense, select and submit multiple requests to Elasticsearch.
+
 ![Multiple Requests](https://github.com/bleskes/sense/raw/readme/docs/images/readme_multiple_requests.png)
 
 
