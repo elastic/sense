@@ -31,38 +31,38 @@ Screenshots
 
 Sense offers handy contextual suggestion to the Elasticsearch API.
 
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_api_suggestions.png" width="400px" title="API Suggestions">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_api_suggestions.png" width="400px" title="API Suggestions">
 
 ### Format validation
 
 Sometimes it is hard to find that little missing comma. Sense automatically highlights and explains invalid input.
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_errors.png" width="400px" title="Format validation">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_errors.png" width="400px" title="Format validation">
 
 ### Scope collapsing
 
 Working on a big JSON query can be distracting. Using the mouse or via a handy keyboard shortcut (Ctrl/Cmd+Option+0)
 , Sense allows you to focus on a sub section and fold others away.
 
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_api_suggestions.png" width="400px" title="Folding">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_scope_collpasing.png" width="400px" title="Folding">
 
 ### Auto formatting
 
 Type your commands however you want and let Sense format them for you.
 
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_auto_formatting_mix.png" width="400px" title="Auto formatting">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_auto_formatting_mix.png" width="400px" title="Auto formatting">
 
 ### Submit multiple requests at once
 
 When testing or trying things out you frequently need to repeat the same sequence of commands.
 Just write them all in Sense, select and submit multiple requests to Elasticsearch.
 
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_multiple_requests.png" width="400px" title="Multiple Requests">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_multiple_requests.png" width="400px" title="Multiple Requests">
 
 ### Copy and Paste cURL commands
 
 Once done, you can copy one or more requests as cURL commands (and of course paste them back)
 
-<img src="https://github.com/bleskes/sense/raw/readme/docs/images/readme_copy_as_curl.png" width="400px" title="Copy As Curl">
+<img src="https://github.com/elastic/sense/raw/master/docs/images/readme_copy_as_curl.png" width="400px" title="Copy As Curl">
 
 Results in:
 
