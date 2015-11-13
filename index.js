@@ -6,6 +6,8 @@ module.exports = function (kibana) {
   let src = resolve(__dirname, 'public/src/');
   let { existsSync } = require('fs');
   const { startsWith, endsWith } = require('lodash');
+  let Wreck = require('wreck');
+  let { fromNode: fn } = require('bluebird');
 
   const apps = [
     {
@@ -44,42 +46,51 @@ module.exports = function (kibana) {
 
     init: function (server, options) {
       const filters = options.proxyFilter.map(str => new RegExp(str));
+      const usingSsl = !!(server.config().get('server.ssl.cert') && server.config().get('server.ssl.key'));
 
-      // http://hapijs.com/api/8.8.1#route-configuration
+      const proxyErr = function (reply, status, uri, message) {
+        reply(`Error connecting to '${uri}':\n\n${message}`).code(502).type('text/plain');
+      };
+
       server.route({
-        path: '/api/sense/proxy',
-        method: ['*', 'GET'],
+        path: '/api/sense/exec',
+        method: 'POST',
         config: {
-          handler: {
-            proxy: {
-              mapUri: function (req, cb) {
-                let { uri } = req.query;
-                if (!uri) {
-                  cb(Boom.badRequest('URI is a required param.'));
-                  return;
-                }
+          validate: {
+            query: Joi.object().keys({
+              uri: Joi.string().uri().required(),
+              method: Joi.valid('HEAD', 'GET', 'PUT', 'POST', 'DELETE').required(),
+            }),
+          },
+          payload: {
+            parse: false,
+            output: 'stream',
+          },
+        },
+        handler(req, reply) {
+          let { method, uri } = req.query;
 
-                if (!filters.some(re => re.test(uri))) {
-                  const err = Boom.forbidden();
-                  err.output.payload = "Error connecting to '" + uri + "':\n\nUnable to send requests to that url.";
-                  err.output.headers['content-type'] = 'text/plain';
-                  cb(err);
-                  return;
-                }
-
-                cb(null, uri);
-              },
-              passThrough: true,
-              xforward: true,
-              onResponse: function (err, res, request, reply, settings, ttl) {
-                if (err != null) {
-                  reply("Error connecting to '" + request.query.uri + "':\n\n" + err.message).type("text/plain").statusCode = 502;
-                } else {
-                  reply(null, res);
-                }
-              }
-            }
+          if (!filters.some(re => re.test(uri))) {
+            return proxyErr(reply, 403, uri, 'Unable to send requests to that url.');
           }
+
+          const xForwarding = {};
+          if (req.info.remoteAddress && req.info.remotePort) {
+            xForwarding['x-forwarded-for'] = req.info.remoteAddress;
+            xForwarding['x-forwarded-port'] = req.info.remotePort;
+            xForwarding['x-forwarded-proto'] = usingSsl;
+          }
+
+          Wreck.request(method, uri, {
+            payload: req.payload,
+            headers: {
+              ...req.headers,
+              ...xForwarding,
+            }
+          }, function (err, upResp) {
+            if (err) proxyErr(reply, 503, uri, err.message);
+            else reply(null, upResp);
+          });
         }
       });
 
