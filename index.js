@@ -6,6 +6,7 @@ module.exports = function (kibana) {
   let src = resolve(__dirname, 'public/src/');
   let { existsSync } = require('fs');
   const { startsWith, endsWith } = require('lodash');
+  const xForwardedFromHapi = require('x-forwarded-from-hapi');
   let Wreck = require('wreck');
   let { fromNode: fn } = require('bluebird');
 
@@ -46,7 +47,6 @@ module.exports = function (kibana) {
 
     init: function (server, options) {
       const filters = options.proxyFilter.map(str => new RegExp(str));
-      const usingSsl = !!(server.config().get('server.ssl.cert') && server.config().get('server.ssl.key'));
 
       const proxyErr = function (reply, status, uri, message) {
         reply(`Error connecting to '${uri}':\n\n${message}`).code(502).type('text/plain');
@@ -74,18 +74,11 @@ module.exports = function (kibana) {
             return proxyErr(reply, 403, uri, 'Unable to send requests to that url.');
           }
 
-          const xForwarding = {};
-          if (req.info.remoteAddress && req.info.remotePort) {
-            xForwarding['x-forwarded-for'] = req.info.remoteAddress;
-            xForwarding['x-forwarded-port'] = req.info.remotePort;
-            xForwarding['x-forwarded-proto'] = usingSsl;
-          }
-
           Wreck.request(method, uri, {
             payload: req.payload,
             headers: {
               ...req.headers,
-              ...xForwarding,
+              ...xForwardedFromHapi(req),
             }
           }, function (err, upResp) {
             if (err) proxyErr(reply, 503, uri, err.message);

@@ -29,6 +29,8 @@
     "gruntify-eslint": "^1.2.0",
     "jit-grunt": "^0.9.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "x-forwarded-from-hapi": "0.0.1"
+  },
   "license": "Apache-2.0"
 }
