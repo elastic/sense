@@ -30,18 +30,15 @@ module.exports.send = function (method, path, data, server, disable_auth_alert) 
 
   // delayed loading for circular references
   var settings = require("./settings");
-
   var options = {
-    url: '/api/sense/proxy?uri=' + encodeURIComponent(path),
-    data: method == "GET" ? null : data,
+    url: `/api/sense/exec?uri=${encodeURIComponent(path)}&method=${encodeURIComponent(method)}`,
+    method: 'POST',
+    data: method === 'GET' ? null : data,
     cache: false,
-    crossDomain: true,
-    type: method,
     password: password,
     username: uname,
-    dataType: "text", // disable automatic guessing
+    dataType: 'text', // disable automatic guessing
   };
-
 
   $.ajax(options).then(
     function (data, textStatus, jqXHR) {
