@@ -13,6 +13,7 @@ module.exports = function (kibana) {
       description: 'JSON aware developer\'s interface to ElasticSearch',
       icon: 'plugins/sense/bonsai.png',
       main: 'plugins/sense/sense',
+      autoload: kibana.autoload.styles,
       injectVars: function (server, options) {
         return options;
       }
