@@ -32,15 +32,16 @@
     "grunt-contrib-copy": "^0.8.2",
     "grunt-gitinfo": "^0.1.7",
     "grunt-replace": "^0.11.0",
+    "grunt-run": "^0.5.2",
     "gruntify-eslint": "^1.2.0",
     "jit-grunt": "^0.9.1",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3"
   },
   "dependencies": {
-    "boom": "2.8.0",
-    "joi": "6.6.1",
-    "lodash": "3.10.1",
+    "boom": "^3.1.2",
+    "joi": "^8.0.4",
+    "lodash": "^4.6.1",
     "minimatch": "^3.0.0"
   },
   "license": "Apache-2.0"
