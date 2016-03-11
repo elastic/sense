@@ -1,4 +1,4 @@
-import { HostBasedProxyConfigCollection } from './server/host_based_proxy_config';
+import { ProxyConfigCollection } from './server/proxy_config_collection';
 
 module.exports = function (kibana) {
   let { resolve, join, sep } = require('path');
@@ -64,7 +64,7 @@ module.exports = function (kibana) {
           {
             match: {
               protocol: '*',
-              hostname: '*',
+              host: '*',
               port: '*',
               path: '*'
             },
@@ -85,7 +85,7 @@ module.exports = function (kibana) {
         throw new Error('sense.ssl.version is no longer supported.');
       }
 
-      const hostBasedProxyConfig = new HostBasedProxyConfigCollection(options.proxyConfig);
+      const proxyConfigCollection = new ProxyConfigCollection(options.proxyConfig);
 
       // http://hapijs.com/api/8.8.1#route-configuration
       server.route({
@@ -132,7 +132,7 @@ module.exports = function (kibana) {
               }
             },
 
-            ...hostBasedProxyConfig.configForUri(uri)
+            ...proxyConfigCollection.configForUri(uri)
           })
         }
       });
