@@ -7,7 +7,7 @@ in the <<introduction>> section.
 [[multi-req]]
 === Multiple Requests Support
 
-The Sense editor allows writing multiple request bellow each other. As shown in the <<introduction>> section, you
+The Sense editor allows writing multiple requests below each other. As shown in the <<introduction>> section, you
 can submit a request to Elasticsearch by positioning the cursor and using the <<action_menu,Action Menu>>. Similarly
 you can select multiple requests in one go:
 
