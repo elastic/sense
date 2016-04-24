@@ -20,7 +20,7 @@ Now start your Kibana server by running:
 $ ./bin/kibana
 ```
 
-Sense should be available on `localhost:5601/app/sense` (assuming Kibana defaults).
+Sense should be available on http://localhost:5601/app/sense (assuming Kibana defaults).
 
 For more information and advanced setting please see the [documentation](https://www.elastic.co/guide/en/sense/current/installing.html).
 
