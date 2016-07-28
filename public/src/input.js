@@ -11,6 +11,7 @@ let storage = require('./storage');
 let utils = require('./utils');
 let es = require('./es');
 let history = require('./history');
+const url = require('url');
 
 var input = new SenseEditor($('#editor'));
 
@@ -113,6 +114,14 @@ function sendCurrentRequestToES() {
 
     var isFirstRequest = true;
 
+    function urlEncodeQueryStringParamValues(elasticsearchUrl) {
+      const parsedUrl = url.parse(elasticsearchUrl, true);
+      if (parsedUrl.query) {
+        parsedUrl.search = undefined; // so the encoded query string in parsedUrl.query is used
+      }
+      return url.format(parsedUrl);
+    }
+
     var sendNextRequest = function () {
       if (req_id != CURRENT_REQ_ID) {
         return;
@@ -122,7 +131,7 @@ function sendCurrentRequestToES() {
         return;
       }
       var req = requests.shift();
-      var es_path = req.url;
+      var es_path = urlEncodeQueryStringParamValues(req.url);
       var es_method = req.method;
       var es_data = req.data.join("\n");
       if (es_data) {
