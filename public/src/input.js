@@ -11,6 +11,7 @@ let storage = require('./storage');
 let utils = require('./utils');
 let es = require('./es');
 let history = require('./history');
+const qs = require('querystring');
 
 var input = new SenseEditor($('#editor'));
 
@@ -117,13 +118,8 @@ function sendCurrentRequestToES() {
       let result = url;
       let [ endpoint, queryString ] = url.split('?');
       if (queryString) {
-        const params = queryString.split('&');
-        params.forEach((param, index) => {
-          const [ key, value ] = param.split('=');
-          params[index] = `${key}=${encodeURIComponent(value)}`;
-        });
-        queryString = params.join('&');
-        result = `${endpoint}?${queryString}`;
+        const parsedQueryString = qs.parse(queryString);
+        result = `${endpoint}?${qs.stringify(parsedQueryString)}`;
       }
       return result;
     }
