@@ -11,7 +11,7 @@ let storage = require('./storage');
 let utils = require('./utils');
 let es = require('./es');
 let history = require('./history');
-const qs = require('querystring');
+const url = require('url');
 
 var input = new SenseEditor($('#editor'));
 
@@ -114,14 +114,12 @@ function sendCurrentRequestToES() {
 
     var isFirstRequest = true;
 
-    function urlEncodeQueryStringParamValues(url) {
-      let result = url;
-      let [ endpoint, queryString ] = url.split('?');
-      if (queryString) {
-        const parsedQueryString = qs.parse(queryString);
-        result = `${endpoint}?${qs.stringify(parsedQueryString)}`;
+    function urlEncodeQueryStringParamValues(elasticsearchUrl) {
+      const parsedUrl = url.parse(elasticsearchUrl, true);
+      if (parsedUrl.query) {
+        parsedUrl.search = undefined; // so the encoded query string in parsedUrl.query is used
       }
-      return result;
+      return url.format(parsedUrl);
     }
 
     var sendNextRequest = function () {
