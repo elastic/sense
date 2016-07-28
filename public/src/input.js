@@ -113,6 +113,21 @@ function sendCurrentRequestToES() {
 
     var isFirstRequest = true;
 
+    function urlEncodeQueryStringParamValues(url) {
+      let result = url;
+      let [ endpoint, queryString ] = url.split('?');
+      if (queryString) {
+        const params = queryString.split('&');
+        params.forEach((param, index) => {
+          const [ key, value ] = param.split('=');
+          params[index] = `${key}=${encodeURIComponent(value)}`;
+        });
+        queryString = params.join('&');
+        result = `${endpoint}?${queryString}`;
+      }
+      return result;
+    }
+
     var sendNextRequest = function () {
       if (req_id != CURRENT_REQ_ID) {
         return;
@@ -122,7 +137,7 @@ function sendCurrentRequestToES() {
         return;
       }
       var req = requests.shift();
-      var es_path = req.url;
+      var es_path = urlEncodeQueryStringParamValues(req.url);
       var es_method = req.method;
       var es_data = req.data.join("\n");
       if (es_data) {
