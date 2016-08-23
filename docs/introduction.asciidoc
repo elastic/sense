@@ -55,7 +55,7 @@ triangle that appears next to the url line of the request. Notice that as you mo
 .The Action Menu
 image::images/introduction_action_menu.png["The Action Menu",width=400,align="center"]
 
-When the response come back, you should see it in the left hand panel:
+When the response comes back, you should see it in the right hand panel:
 
 .The Output Pane
 image::images/introduction_output.png[Screenshot]
