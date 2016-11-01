@@ -19,7 +19,8 @@ let parts = [
   require('./es_2_0/search'),
   require('./es_2_0/settings'),
   require('./es_2_0/templates'),
-  require('./es_2_0/warmers')
+  require('./es_2_0/warmers'),
+  require('./es_2_0/watcher')
 ];
 
 function ES_2_0() {
