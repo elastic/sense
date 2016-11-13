@@ -63,7 +63,7 @@ this can become a security risk. In those cases, we highly recommend you lock do
 `sense.proxyFilter` setting. The setting accepts a list of regular expressions that are evaluated against each URL
  the proxy is requested to retrieve. If none of the regular expressions match the proxy will reject the request.
 
-Here is an example configuration the only allows Sense to connect to localhost:
+Here is an example configuration that only allows Sense to connect to localhost:
 
 [source,yaml]
 --------
