@@ -98,6 +98,16 @@ module.exports = function (api) {
       "filters": [],
       "text": "",
       "tokenizer": ""
+    },
+    data_autocomplete_rules: {
+      "text": [""],
+      "field": "{}",
+      "analyzer": "{}",
+      "tokenizer": "{}",
+      "char_filters": [""],
+      "filters": [""],
+      "explain": {__one_of: [false, true]},
+      "attributes": [""]
     }
   });
 
