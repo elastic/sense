@@ -7,7 +7,7 @@ Once Kibana is installed, you can install Sense running the following command fr
 
 [source,bash]
 -----------
-$./bin/kibana plugin --install elastic/sense
+$./bin/kibana-plugin install elastic/sense
 -----------
 
 This will download and install the latest available version of Sense.
