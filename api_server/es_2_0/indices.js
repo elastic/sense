@@ -70,7 +70,11 @@ module.exports = function (api) {
     patterns: [
       "{indices}/_segments",
       "_segments"
-    ]
+    ],
+    url_params: {
+      "human": "__flag__",
+      "verbose": "__flag__"
+    }
   });
 
   api.addEndpointDescription('_recovery', {
